@@ -1,0 +1,24 @@
+@import 'src/styles/variables';
+
+.container{
+    text-align: center;
+    background-color: $silver;
+    margin: 50px;
+    padding: 10px;
+    border: 5px solid $black;
+    .lastUpdated{
+        text-align: right;
+        font-size: .70em;
+    }
+   
+    .confirmedCases{
+        border: 5px solid $black;
+        margin: 5px;
+    }
+
+    .confirmedDeaths{
+        border: 5px solid $black;
+        margin: 5px;
+    }
+    
+}

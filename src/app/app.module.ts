@@ -9,6 +9,7 @@ import { FooterComponent } from './views/footer/footer/footer.component';
 import { HeaderComponent } from './views/header/header/header.component';
 import { CovidGlobalStatsComponent } from './views/main/covid-global-stats/covid-global-stats.component';
 import { CovidLocalStatsComponent } from './views/main/covid-local-stats/covid-local-stats.component';
+import { SearchBarComponent } from './views/main/search-bar/search-bar.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { CovidLocalStatsComponent } from './views/main/covid-local-stats/covid-l
     FooterComponent,
     HeaderComponent,
     CovidGlobalStatsComponent,
-    CovidLocalStatsComponent
+    CovidLocalStatsComponent,
+    SearchBarComponent
   ],
   imports: [
     BrowserModule,

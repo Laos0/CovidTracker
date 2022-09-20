@@ -27,7 +27,7 @@ export class CovidLocalStatsComponent implements OnInit {
   }
 
   getLocalStats(){
-    this.covidService.getGlobalCovidStats().subscribe({
+    this.covidService.getCovidStats().subscribe({
       next: (resp: any) => {
         //console.log(resp.rawData);
 

@@ -1,1 +1,15 @@
-<p>search-bar works!</p>
+<div class="container">
+    <div>
+        <div class="search-bar-container">
+            <span>Enter </span>
+            <!-- <input type="text" name="search" #box (keyup)="getSelectedCovidData(box.value)" placeholder="Enter State, Region or County#"> -->
+            <input type="text" #searchbar (keyup)="getSelectedCovidData($event)" [(ngModel)]="userInput" placeholder="Enter state, region...">
+            <ul>
+                <!-- Here we will display the Name of the county/state/region etc-->
+                <li *ngFor="let data of searchResult">
+                    <p>State: {{data.Province_State}} County: {{data.Admin2}} Case: {{data.Confirmed}} Deaths: {{data.Deaths}}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

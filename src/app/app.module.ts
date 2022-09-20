@@ -10,6 +10,7 @@ import { HeaderComponent } from './views/header/header/header.component';
 import { CovidGlobalStatsComponent } from './views/main/covid-global-stats/covid-global-stats.component';
 import { CovidLocalStatsComponent } from './views/main/covid-local-stats/covid-local-stats.component';
 import { SearchBarComponent } from './views/main/search-bar/search-bar.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { SearchBarComponent } from './views/main/search-bar/search-bar.component
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     AppRoutingModule
   ],
   providers: [],

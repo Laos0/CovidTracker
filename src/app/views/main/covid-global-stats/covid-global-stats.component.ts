@@ -23,11 +23,16 @@ export class CovidGlobalStatsComponent implements OnInit {
   // under the key global: confirmed, recovered, deaths
   getData(){
 
-    this.covidService.getGlobalCovidStats().subscribe({
+    // get request for all covid stats
+    this.covidService.getCovidStats().subscribe({
       next: (resp: any) => {
+        
+        this.covidService.covidData = resp.rawData;
+        // getting the global stats from object literal
         this.globalConfirmed = resp.summaryStats.global.confirmed;
         this.globalDeaths = resp.summaryStats.global.deaths;
         this.lastUpdatedGlobal = resp.cache.lastUpdated;
+       // console.log(this.covidService.covidData);
       },
       error: (e) => {console.error(e)},
       complete: () => {console.log("Data returned completed from CovoidGlobalStats.component.ts")}

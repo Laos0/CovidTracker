@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ResponseCovidInfo } from './responses/response-covid-info';
 import { ICovidGlobal } from 'src/app/models/i-covid-global';
+import { ICovidInfo } from 'src/app/models/i-covid-info';
 
 
 @Injectable({
@@ -14,9 +15,12 @@ export class CovidDataService {
   // Covid data api source
   private baseUrl: string = "https://coronavirus.m.pipedream.net/";
 
+  // make private, then need setter and getter
+  public covidData: ICovidInfo[];
+
   constructor(private http: HttpClient) { }
 
-  getGlobalCovidStats(): Observable<ICovidGlobal[]>{
+  getCovidStats(): Observable<ICovidGlobal[]>{
     
     return this.http.get<ICovidGlobal[]>(this.baseUrl);
   }
@@ -36,4 +40,5 @@ export class CovidDataService {
   public delete(url: string, options?: any) { 
   return this.http.delete(url, options); 
   }
+
 }

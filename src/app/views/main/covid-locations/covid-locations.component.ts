@@ -21,7 +21,7 @@ export class CovidLocationsComponent implements OnInit {
   }
 
   getData(){
-    this.covidService.getGlobalCovidStats().subscribe({
+    this.covidService.getCovidStats().subscribe({
       next: (resp: any) => {
         this.globalCovid = resp.summaryStats.global;
         console.log(this.globalCovid);

@@ -34,7 +34,7 @@ export class SearchBarComponent implements OnInit {
         .startsWith(event.target.value.toLowerCase());
     });
     
-    console.log(this.searchResult);
+    //console.log(this.searchResult);
 
     return null;
   }

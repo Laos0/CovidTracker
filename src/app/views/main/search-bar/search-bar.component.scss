@@ -1,13 +1,48 @@
+@import 'src/styles/variables';
+
+
+
+
 .search-bar-container{
     text-align: center;
+
+    input{
+        border-radius: .5em;
+        width: 500px;
+        margin: 0 auto;
+        padding: .5em;;
+    }
 }
 
-.list{
 
-    margin: 5px;
+// change px to em to scale with mobile
+.list{
+    
+    margin: 0 auto;
+    margin-top: .25em;
     padding: 5px;
     width: 500px;
     height: 110px;
     overflow: auto;
     text-align: justify;
+    background-color: lighten($secondary, 10%);
+    border-radius: .5em;
+
+    li{
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    // allow us to highlight the searched results and change the cursor to a pointer when hovered over
+    li:hover{
+        background-color: lighten($secondary, 20%);
+        cursor: pointer;
+    }
+
+    ul{
+        margin: 0;
+        padding: 0;
+    }
 }
+

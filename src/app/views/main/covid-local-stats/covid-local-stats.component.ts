@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ICovidInfo } from 'src/app/models/i-covid-info';
 import { CovidDataService } from 'src/app/services/covid-data-service/covid-data.service';
+import { SelectionService } from 'src/app/services/selection-service/selection.service';
 import { UserLocationService } from 'src/app/services/user-location-service/user-location.service';
 
 @Component({
@@ -11,19 +13,32 @@ export class CovidLocalStatsComponent implements OnInit {
 
   public state: string;
   public county: string;
+  public region: string;
   public localConfirmed: string;
   public localDeaths: string;
   public lastUpdated: string;
 
-  constructor(private covidService: CovidDataService, private userLocationService: UserLocationService) { }
+  constructor(private covidService: CovidDataService, 
+              private userLocationService: UserLocationService, 
+              private selectionService: SelectionService) { }
 
   ngOnInit(): void {
     
+
     // get latitude and longitude from user 
     this.getCurrentLocation();
 
     // fetching all covid data
     this.getLocalStats();
+
+    this.selectionService.onSearchBarSelect$.subscribe((data: ICovidInfo) =>{
+      this.state = data.Province_State;
+      this.county = data.Admin2;
+      this.region = data.Country_Region;
+      this.localConfirmed = data.Confirmed;
+      this.localDeaths = data.Deaths;
+      this.lastUpdated = data.Last_Update;
+    });
   }
 
   getLocalStats(){
@@ -45,6 +60,7 @@ export class CovidLocalStatsComponent implements OnInit {
         this.localConfirmed = LCD[0].Confirmed;
         this.localDeaths = LCD[0].Deaths;
         this.lastUpdated = LCD[0].Last_Update;
+        this.region = LCD[0].Country_Region;
 
         
         // console.log(localCovidData[0]);

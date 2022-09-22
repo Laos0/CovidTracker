@@ -1,7 +1,20 @@
 <div class="container">
     <p class="lastUpdated">Last updated: {{lastUpdated}}</p>
     <!--Use a local variable that will display the name of the country-->
-    <h1 class="centerText">{{county}} Summary Stats</h1>
+    <h1 class="centerText">
+
+        <span *ngIf="county">
+            {{county | titlecase}} 
+        </span>
+
+        <span *ngIf="state">
+            {{state}} 
+        </span>
+
+        <span *ngIf="region">
+            {{region}} 
+        </span>
+    </h1>
 
     <div class="confirmedCases">
         <h2 class="centerText">Confirmed Cases</h2>

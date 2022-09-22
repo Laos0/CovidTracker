@@ -1,15 +1,26 @@
 <div class="container">
     <div>
         <div class="search-bar-container">
-            <span>Enter </span>
+            
+            <h2>Search For An Area</h2>
             <!-- <input type="text" name="search" #box (keyup)="getSelectedCovidData(box.value)" placeholder="Enter State, Region or County#"> -->
-            <input type="text" #searchbar (keyup)="getSelectedCovidData($event)" [(ngModel)]="userInput" placeholder="Enter state, region...">
+            <input type="text" #searchbar (keyup)="getSelectedCovidData($event)" [(ngModel)]="userInput" placeholder="Enter state, county or region...">
             
             <div class="list">
                 <ul>
                     <!-- Here we will display the Name of the county/state/region etc-->
-                    <li *ngFor="let data of searchResult">
-                        <p>State: {{data.Province_State}} County: {{data.Admin2}} Case: {{data.Confirmed}} Deaths: {{data.Deaths}}</p>
+                    <li *ngFor="let data of searchResult" >
+
+                            <div class="searchResult" (click)="updateLocalCovidData(data)">
+                                <ng-container *ngTemplateOutlet="(data.Province_State && data.Admin2 && data.Country_Region) ? usaTmpl : null; context: { d: data }">
+                                </ng-container>
+
+                                <ng-container *ngTemplateOutlet="(data.Province_State && !data.Admin2 && data.Country_Region) ? countryWithStateTmpl : null; context: { d: data }">
+                                </ng-container>
+
+                                <ng-container *ngTemplateOutlet="(!data.Province_State && !data.Admin2 && data.Country_Region) ? countryWithNoStateTmpl : null; context: { d: data }">
+                                </ng-container>
+                            </div>
                     </li>
                 </ul>
             </div>
@@ -17,3 +28,19 @@
         </div>
     </div>
 </div>
+
+
+
+
+<!-- Advance way of using ng-template by passing data to ng-template through ng-container with ngTemplateOutlet-->
+<ng-template #usaTmpl let-d="d">
+    {{d.Province_State}}, {{d.Admin2}}, {{d.Country_Region}}
+</ng-template>
+
+<ng-template #countryWithStateTmpl let-d="d">
+    {{d.Province_State}}, {{d.Country_Region}}
+</ng-template>
+
+<ng-template #countryWithNoStateTmpl let-d="d">
+    {{d.Country_Region}}
+</ng-template>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { ICovidInfo } from 'src/app/models/i-covid-info';
 import { CovidDataService } from 'src/app/services/covid-data-service/covid-data.service';
 import { SelectionService } from 'src/app/services/selection-service/selection.service';
@@ -18,6 +20,9 @@ export class CovidLocalStatsComponent implements OnInit {
   public localDeaths: string;
   public lastUpdated: string;
 
+  public _onUserLocation = new Subject<void>();
+  public onUserLocation = this._onUserLocation.asObservable();
+
   constructor(private covidService: CovidDataService, 
               private userLocationService: UserLocationService, 
               private selectionService: SelectionService) { }
@@ -28,8 +33,16 @@ export class CovidLocalStatsComponent implements OnInit {
     // get latitude and longitude from user 
     this.getCurrentLocation();
 
-    // fetching all covid data
-    this.getLocalStats();
+    // not needed, just for practicing purposes and to replace take(#)
+    const _unSub = new Subject<void>();
+
+    // once the _onUserLocation subject publishes/alert its data/non-data then this line gets run
+    this.onUserLocation.pipe(takeUntil(_unSub)).subscribe((d) =>{
+
+      _unSub.next();
+      // fetching all covid data
+      this.getLocalStats();
+    });
 
     this.selectionService.onSearchBarSelect$.subscribe((data: ICovidInfo) =>{
       this.state = data.Province_State;
@@ -88,7 +101,25 @@ export class CovidLocalStatsComponent implements OnInit {
       this.state = resp.addresses[0].address.countrySubdivisionName;
       this.county = resp.addresses[0].address.countrySecondarySubdivision;
 
+      // this is how you publish/alert on a subject to listeners (observables)
+      this._onUserLocation.next();
     });;
   }
 
 }
+function delay(arg0: number): import("rxjs").OperatorFunction<Object, unknown> {
+  throw new Error('Function not implemented.');
+}
+
+function take(arg0: number): import("rxjs").OperatorFunction<void, unknown> {
+  throw new Error('Function not implemented.');
+}
+
+function timeout(arg0: number): import("rxjs").OperatorFunction<unknown, unknown> {
+  throw new Error('Function not implemented.');
+}
+
+function takeuntil(): import("rxjs").OperatorFunction<unknown, unknown> {
+  throw new Error('Function not implemented.');
+}
+

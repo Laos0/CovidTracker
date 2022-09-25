@@ -18,7 +18,7 @@ export class UserLocationService {
   
   constructor(private covidService: CovidDataService, private http: HttpClient) { }
 
-  // gets me the user's lattitude and longitude
+  // gets me the user's lattitude and longitude using promise instead of observable
   getPosition(): Promise<any>
   {
     return new Promise((resolve, reject) => {

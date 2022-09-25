@@ -19,7 +19,7 @@ export class SearchBarComponent implements OnInit {
   constructor(private covidService: CovidDataService, private selectionService: SelectionService) { }
 
   ngOnInit(): void {
-    this.covidService.covidData = this.covidData;
+    //this.covidService.covidData = this.covidData;
   }
 
   // This method will keep being fired whenever user changes its value

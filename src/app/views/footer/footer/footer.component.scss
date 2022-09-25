@@ -1,7 +1,9 @@
+@import 'src/styles/variables';
+
 .footer {
     padding: 10px;
     text-align: center;
-    background: #7a6b6b;
+    background: $black;
     color: white;
     font-size: 25px;
 }
